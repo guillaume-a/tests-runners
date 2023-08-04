@@ -3,26 +3,14 @@ name: CI Test
 on:
   push:
     branches: [ "main" ]
-
   workflow_dispatch:
+  
 jobs:
-  node-14:
+  get-version:
     runs-on: self-hosted
-    container: node:14-alpine
-    steps:
-      - run: node --version
-  node-16:
-    runs-on: self-hosted
-    container: node:16-alpine
-    steps:
-      - run: node --version
-  node-18:
-    runs-on: self-hosted
-    container: node:18-alpine
-    steps:
-      - run: node --version
-  node-20:
-    runs-on: self-hosted
-    container: node:20-alpine
+    strategy:
+      matrix:
+        node-version: [node:14-alpine, node:16-alpine, node:18-alpine, node:20-alpine]
+    container: ${{ matrix.node-version }}
     steps:
       - run: node --version
