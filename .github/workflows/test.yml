@@ -10,7 +10,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        node-version: [node:14-alpine, node:16-alpine, node:18-alpine, node:20-alpine]
-    container: ${{ matrix.node-version }}
+        node-version: [14, 16, 18, 20]
+    container: node:${{ matrix.node-version }}-alpine
     steps:
       - run: node --version
